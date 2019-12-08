@@ -1,0 +1,163 @@
+<div *ngIf="error" class="alert alert-danger">{{error}}</div>
+<div *ngIf="success" class="alert alert-success">{{success}}</div>
+
+<div class="row">
+    <div id="theForm" class="col-md-4">
+        <h2>The form</h2>
+        <form #f="ngForm" name="theForm" (submit)="addForm(f)">
+            <div class="form-group">
+                <label>First Name</label>
+                <input type="text"
+                      class="form-control"
+                      name="fname"
+                      [(ngModel)]="form.fname"
+                      #formFname="ngModel"
+                      required
+                      pattern="^[a-zA-Z]+$">
+                <!-- <span class="help-block danger" *ngIf="formModel.errors?.required && formModel.touched">
+                  The model name is required
+                </span>
+                <span class="help-block danger" *ngIf="formModel.errors?.pattern && formModel.touched">
+                  The model name can only contain the letters a-z or A-Z
+                </span> -->
+              </div>
+
+              <div class="form-group">
+                  <label>Last Name</label>
+                  <input type="text"
+                        class="form-control"
+                        name="lname"
+                        [(ngModel)]="form.lname"
+                        #formLname="ngModel"
+                        required
+                        pattern="^[a-zA-Z]+$">
+                  
+                </div>
+
+                <div class="form-group">
+                    <label>Phone</label>
+                    <input type="text"
+                          class="form-control"
+                          name="phono"
+                          [(ngModel)]="form.phono"
+                          #formPhono="ngModel"
+                          required>
+                   
+                  </div>
+
+                  <div class="form-group">
+                      <label>Email</label>
+                      <input type="email"
+                            class="form-control"
+                            name="email"
+                            [(ngModel)]="form.email"
+                            #formEmail="ngModel"
+                            required>
+                      
+                    </div>
+
+                    <div class="form-group">
+                        <label>Address</label>
+                        <textarea
+                              class="form-control"
+                              name="addre"
+                              [(ngModel)]="form.addre"
+                              #formAddre="ngModel"
+                              required></textarea>
+                       
+                      </div>
+
+                      <div class="form-group">
+                          <label>Address</label>
+                          <select 
+                          class="form-control"
+                          name="addre"
+                          [(ngModel)]="form.catag"
+                          #formCatag="ngModel"
+                          required>
+                              <option value="student">Student</option>
+                              <option value="personal">Personal</option>
+                              <option value="buisness">Buisness</option>
+                              <option value="other">Other</option>
+                            </select>
+                           
+                        </div>
+
+                      <button
+                      class="btn btn-primary btn-sm"
+                      [disabled]="f.invalid">Add</button>
+        </form>
+      </div>
+     
+      <div id="theList" class="col-md-8">
+          <h2>The list</h2>
+          <div class="list-group">
+              <div *ngFor="let item of forms;let i = index;" class="list-group-item row">
+                  <div class="col-3" style="float:left">
+                      <input type="text"
+                      [(ngModel)]="forms[i].fname"
+                      class="form-control"
+                      required
+                      pattern="^[a-zA-Z]+$"
+                      #fname="ngModel"
+                      [ngClass]="{ 'is-invalid': fname.touched && fname.invalid }">
+                   </div>
+
+                   <div class="col-3" style="float:left">
+                      <input type="text"
+                      [(ngModel)]="forms[i].lname"
+                      class="form-control"
+                      required
+                      pattern="^[a-zA-Z]+$"
+                      #lname="ngModel">
+                   </div>
+
+                   <div class="col-3" style="float:left">
+                      <input type="number"
+                      [(ngModel)]="forms[i].phono"
+                      class="form-control"
+                      required
+                      #phono="ngModel">
+                   </div>
+
+                   <div class="col-3" style="float:left">
+                      <input type="email"
+                      [(ngModel)]="forms[i].email"
+                      class="form-control"
+                      required
+                       #email="ngModel">
+                   </div>
+
+                   <div class="col-3" style="float:left">
+                      <input type="text"
+                      [(ngModel)]="forms[i].addre"
+                      class="form-control"
+                      required
+                       #addre="ngModel">
+                   </div>
+
+                   <div class="col-3" style="float:left">
+                      <input type="text"
+                      [(ngModel)]="forms[i].catag"
+                      class="form-control"
+                      required
+                       #catag="ngModel">
+                   </div>
+
+                   <div class="col-4" style="float:left">
+                      <input type="button"
+                             value="Update"
+                             class="btn btn-success btn-sm"
+                             [disabled]="fname.invalid || phono.invalid"
+                             (click)="updateForm(fname,lname,phono,email,addre,item.id)">
+                      &nbsp;
+                      <input type="button"
+                             value="Delete"
+                             class="btn btn-danger btn-sm"
+                             (click)="deleteForm(item.id)">
+            
+                    </div>
+                  </div>
+             </div>
+           </div>
+</div>
